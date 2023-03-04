@@ -6,21 +6,11 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:48:29 by yichan            #+#    #+#             */
-/*   Updated: 2023/01/13 22:48:25 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/04 22:04:13 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
-
-void	show_heredoc(char *line, int *fd)
-{
-	if (line[ft_strlen(line)] != '\n')
-		ft_strlcat(line, "\n", line[ft_strlen(line)]);
-	if (write(fd[1], line, ft_strlen(line)) == -1)
-		perror("ERROR");
-	if (write(fd[1], "\n", 1) == -1)
-		perror("ERROR");
-}
 
 char	**getpath(char **envp)
 {
@@ -38,6 +28,16 @@ char	**getpath(char **envp)
 		i++;
 	}
 	return (NULL);
+}
+
+void	show_heredoc(char *line, int *fd)
+{
+	if (line[ft_strlen(line)] != '\n')
+		ft_strlcat(line, "\n", line[ft_strlen(line)]);
+	if (write(fd[1], line, ft_strlen(line)) == -1)
+		perror("ERROR");
+	if (write(fd[1], "\n", 1) == -1)
+		perror("ERROR");
 }
 
 char	*connector(char *s1, char medium, char *s2)
@@ -60,19 +60,6 @@ char	*connector(char *s1, char medium, char *s2)
 	return (ptr);
 }
 
-void	strclear(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i ++;
-	}
-	free(str[i]);
-}
-
 pid_t	fileopen(char *path, char flag)
 {
 	pid_t	fd;
@@ -87,4 +74,17 @@ pid_t	fileopen(char *path, char flag)
 	if (fd == -1)
 		perror("ERROR");
 	return (fd);
+}
+
+void	strclear(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i ++;
+	}
+	free(str[i]);
 }

@@ -6,12 +6,42 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/02/01 18:36:56 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/04 22:02:48 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 #include <stdio.h>
+
+/*strcmp to check the line equal to limiter(block)*/
+/*nodup is needed if written inside the fd[1] directly*/
+
+void	ins_limiter(int *fd, char *limiter)
+{
+	char	*line;
+
+	close(fd[0]);
+	ft_putstr_fd("pipe heredoc>", 1);
+	while (1)
+	{
+		line = ft_strtrim(get_next_line(0), "\n");
+		if (!line)
+			break ;
+		if (ft_strcmp(limiter, line) == 0)
+		{
+			close(fd[1]);
+			free(line);
+			exit(EXIT_SUCCESS);
+		}
+		ft_putstr_fd("pipe heredoc>", 1);
+		show_heredoc(line, fd);
+		free(line);
+	}
+	free(line);
+	close(fd[1]);
+	perror("ERROR");
+}
+
 /*
 H - here_doc
 I - input;
@@ -44,34 +74,6 @@ void	executer(char *cmd, char *envp[])
 	strclear(command);
 	strclear(paths);
 	ft_perror("ERROR: command not found");
-}
-/*strcmp to check the line equal to limiter(block)*/
-/*nodup is needed if written inside the fd[1] directly*/
-
-void	ins_limiter(int *fd, char *limiter)
-{
-	char	*line;
-
-	close(fd[0]);
-	ft_putstr_fd("pipe heredoc>", 1);
-	while (1)
-	{
-		line = ft_strtrim(get_next_line(0), "\n");
-		if (!line)
-			break ;
-		if (ft_strcmp(limiter, line) == 0)
-		{
-			close(fd[1]);
-			free(line);
-			exit(EXIT_SUCCESS);
-		}
-		ft_putstr_fd("pipe heredoc>", 1);
-		show_heredoc(line, fd);
-		free(line);
-	}
-	free(line);
-	close(fd[1]);
-	perror("ERROR");
 }
 
 void	here_doc(int ac, char *av[])
