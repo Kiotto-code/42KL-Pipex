@@ -6,24 +6,22 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:48:29 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 01:54:09 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/14 03:47:23 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 
-char	**getpath(char **envp)
+char	*get_env_val(char **envp, char *key)
 {
 	int		i;
-	char	**paths;
 
 	i = 0;
 	while (envp[i])
 	{
-		if (!ft_strncmp(envp[i], "PATH=", 5))
+		if (!ft_strncmp(envp[i], key, ft_strlen(key)))
 		{
-			paths = ft_split(envp[i] + 5, ':');
-			return (paths);
+			return (envp[i] + 5);
 		}
 		i++;
 	}
@@ -56,7 +54,15 @@ pid_t	fileopen(char *path, char flag)
 
 	fd = -1;
 	if (flag == 'I')
+	{
 		fd = open(path, O_RDONLY);
+		if (fd == -1)
+		{
+			func();
+			ft_error(ft_strjoin("no such file or directory: ", path), 1);
+			// ft_perror(path);
+		}
+	}
 	else if (flag == 'O')
 		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else if (flag == 'h')

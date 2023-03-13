@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 02:36:15 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/14 04:03:09 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ O - output;loca
 
 void	executer(char *cmd, char *envp[])
 {
-	int		i;
 	char	**command;
 	char	**paths;
+	int		i;
 	char	*object;
 
 	command = ft_split(cmd, ' ');
-	paths = getpath(envp);
+	paths = ft_split(get_env_val(envp, "PATH="), ':');
 	if (paths == NULL)
 		ft_perror("ERROR");
 	i = 0;
@@ -62,13 +62,13 @@ void	executer(char *cmd, char *envp[])
 		if (access(object, F_OK) == 0)
 		{
 			if (execve(object, command, envp) == -1)
-				ft_perror(command[0]);
+				ft_perror(ft_strjoin("command not found: ", command[0]));
 		}
 		free(object);
 		i ++;
 	}
 	arrclear(paths);
-	ft_perror(*command);
+	ft_perror(ft_strjoin("command not found: ", command[0]));
 }
 
 void	here_doc(int ac, char *av[])
@@ -131,8 +131,8 @@ void	command_executing(char *cmd, char *envp[])
 void	pipex(int ac, char **av, char**envp)
 {
 	int		num;
-	pid_t	fd_in;
-	pid_t	fd_out;
+	int		fd_in;
+	int		fd_out;
 
 	if (!ft_strcmp(av[1], "here_doc"))
 	{
@@ -152,5 +152,6 @@ void	pipex(int ac, char **av, char**envp)
 		command_executing(av[num++], envp);
 	if (dup2(fd_out, STDOUT_FILENO) == -1)
 		ft_perror("ERROR");
+	func();
 	executer(av[ac - 2], envp);
 }

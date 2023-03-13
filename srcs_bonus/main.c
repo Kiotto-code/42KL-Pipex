@@ -6,19 +6,19 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 02:36:22 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/14 03:20:52 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 
-// void	func(void)
-// {
-// 	char	buffer[39];
+void	func(void)
+{
+	char	buffer[39];
 
-// 	snprintf(buffer, sizeof(buffer), "leaks -q %d >&2", getpid());
-// 	system(buffer);
-// }
+	snprintf(buffer, sizeof(buffer), "leaks -q %d >&2", getpid());
+	system(buffer);
+}
 
 int	main(int ac, char **av, char**envp)
 {
