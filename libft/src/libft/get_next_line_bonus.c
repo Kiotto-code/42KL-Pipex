@@ -6,13 +6,13 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:23:47 by yichan            #+#    #+#             */
-/*   Updated: 2022/12/07 16:25:16 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/04 22:38:25 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-char	*readline(int fd, char *str)
+char	*gnl_readline(int fd, char *str)
 {
 	char	*buff;
 	int		r_ret;
@@ -90,31 +90,10 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE <= 0 || fd > 1024 || fd < 0)
 		return (NULL);
-	str[fd] = readline(fd, str[fd]);
+	str[fd] = gnl_readline(fd, str[fd]);
 	if (!str[fd])
 		return (NULL);
 	ret = currentline (str[fd]);
 	str[fd] = remain (str[fd]);
 	return (ret);
 }
-
-/*#include <stdio.h>
-#include <fcntl.h>
-int	main(void)
-{
-	char	*line;
-	int		i;
-	int		fd1;
-	fd1 = open("/Users/yichan/get_next_line/test.txt", O_RDONLY);
-
-	i = 1;
-	while (i < 42)
-	{
-		line = get_next_line(fd1);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		i++;
-	}
-	close(fd1);
-	return (0);
-}*/

@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 00:39:12 by yichan           ###   ########.fr       */
+/*   Created: 2022/07/11 14:56:26 by yichan            #+#    #+#             */
+/*   Updated: 2023/01/11 18:41:54 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_bonus.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char**envp)
+t_stk	*ft_lstnew2(int content)
 {
-	if (ac < 5)
-		ft_error("Need More Argument", 1);
-	pipex(ac, av, envp);
-	return (0);
+	t_stk	*node;
+
+	node = malloc(sizeof(t_stk));
+	if (!node)
+		return (NULL);
+	node->nbr = content;
+	node->index = 0;
+	return (node);
 }

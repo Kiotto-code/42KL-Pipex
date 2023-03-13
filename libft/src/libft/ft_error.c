@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 00:39:12 by yichan           ###   ########.fr       */
+/*   Created: 2023/01/11 18:40:34 by yichan            #+#    #+#             */
+/*   Updated: 2023/01/28 19:11:52 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_bonus.h"
-
-int	main(int ac, char **av, char**envp)
+#include "libft.h"
+/**
+ * @brief an error function to exit program w custom message displayed
+ * 
+ * @param str print message
+ * @param stat exit status 0: SUCCESS && 1: FAILURE
+ */
+void	ft_error(char *str, int stat)
 {
-	if (ac < 5)
-		ft_error("Need More Argument", 1);
-	pipex(ac, av, envp);
-	return (0);
+	if (stat != 0 && stat != 1)
+		ft_error("Wrong STAT input", 1);
+	ft_putendl_fd(str, stat + 1);
+	exit(stat);
 }

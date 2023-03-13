@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strend.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 00:39:12 by yichan           ###   ########.fr       */
+/*   Created: 2023/01/16 23:27:42 by yichan            #+#    #+#             */
+/*   Updated: 2023/03/11 01:22:28 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_bonus.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char**envp)
+char	*ft_strend(char *str, int n)
 {
-	if (ac < 5)
-		ft_error("Need More Argument", 1);
-	pipex(ac, av, envp);
-	return (0);
+	return (str + (ft_strlen(str) - n));
 }
+
+// int main()
+// {
+// 	char *s = "hello";
+// 	char *ret = ft_strend(s, strlen(s) -1);
+// 	printf("%s", ret);
+// }

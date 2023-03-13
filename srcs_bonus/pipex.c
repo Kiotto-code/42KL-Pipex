@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/04 22:02:48 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/14 00:44:43 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,26 @@ void	ins_limiter(int *fd, char *limiter)
 {
 	char	*line;
 
+	limiter = ft_strjoinf(limiter, "\n");
 	close(fd[0]);
-	ft_putstr_fd("pipe heredoc>", 1);
 	while (1)
 	{
-		line = ft_strtrim(get_next_line(0), "\n");
+		ft_putstr_fd("pipe heredoc>", 1);
+		line = get_next_line(0);
 		if (!line)
-			break ;
+			exit(EXIT_SUCCESS);
 		if (ft_strcmp(limiter, line) == 0)
 		{
 			close(fd[1]);
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
-		ft_putstr_fd("pipe heredoc>", 1);
-		show_heredoc(line, fd);
+		ft_putendl_fd(line, 1);
 		free(line);
 	}
 	free(line);
 	close(fd[1]);
-	perror("ERROR");
+	ft_perror("ERROR");
 }
 
 /*
@@ -82,7 +82,7 @@ void	here_doc(int ac, char *av[])
 	int	pid;
 
 	if (ac < 6)
-		ft_error("ERROR: wrong argument numbers");
+		ft_error("ERROR: wrong argument numbers", 1);
 	if (pipe(fd) == -1)
 		perror("ERROR");
 	pid = fork();

@@ -6,27 +6,41 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 11:42:47 by yichan            #+#    #+#             */
-/*   Updated: 2022/12/07 16:24:51 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/14 00:44:23 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <unistd.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <stddef.h>
 # include <limits.h>
+# include <stdarg.h>
+# include <fcntl.h>
+# include <stdint.h>
+# include <stdio.h>
 
+typedef struct s_stk
+{
+	int				nbr;
+	int				index;
+}			t_stk;
+
+/**
+ * @brief 
+ * content -> envp
+ * 
+ */
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
+	struct s_list	*prev;
 }	t_list;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
-# endif
-
+t_stk	*ft_lstnew2(int content);
 int		ft_isalpha(int n);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -50,7 +64,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s1);
-void	*ft_calloc(size_t count, size_t size);
+void	*ft_calloc(size_t count);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
@@ -71,12 +85,15 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int		ft_max(int a, int b);
+void	ft_error(char *str, int stat);
 int		ft_strcmp(const char *s1, const char *s2);
-/*get_next_line*/
-char	*ft_strchr2(char *str, int c);
-char	*ft_strjoin2(char *s1, char *s2);
-size_t	ft_strlen2(char *str);
 char	*get_next_line(int fd);
-char	*joinfree(char *str1, char *str2);
+char	*ft_strend(char *str, int n);
+char	*ft_strjoinf(char *s1, char const *s2);
+int		ft_arrind(char **arr);
+char	**ft_duparr(char **env);
+int		ft_arr2lst(t_list **lst, char **arr, \
+			void (*add_back)(t_list **lst, t_list *new));
 
 #endif

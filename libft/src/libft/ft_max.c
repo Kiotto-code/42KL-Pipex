@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 12:40:38 by yichan            #+#    #+#             */
-/*   Updated: 2022/07/11 14:36:07 by yichan           ###   ########.fr       */
+/*   Created: 2023/01/08 23:05:45 by yichan            #+#    #+#             */
+/*   Updated: 2023/01/11 18:42:05 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+int	ft_max(int a, int b)
 {
-	void			*ptr;
-	unsigned int	len;
-
-	if (size >= SIZE_MAX || count >= SIZE_MAX)
-		return (NULL);
-	len = count * size;
-	ptr = malloc(len);
-	if (!ptr)
-		return (NULL);
-	ft_bzero (ptr, size * count);
-	return (ptr);
+	if (a > b)
+		return (a);
+	return (b);
 }

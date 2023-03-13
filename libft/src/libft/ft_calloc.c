@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 15:38:02 by yichan            #+#    #+#             */
-/*   Updated: 2022/07/11 16:11:48 by yichan           ###   ########.fr       */
+/*   Created: 2022/07/06 12:40:38 by yichan            #+#    #+#             */
+/*   Updated: 2023/02/25 00:06:36 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	*ft_calloc(size_t count)
 {
-	if (!new)
-		return ;
-	else if (!lst)
-		*lst = new;
-	else
-	{
-		new->next = *lst;
-		*lst = new;
-	}
+	void			*ptr;
+
+	if (count >= SIZE_MAX)
+		return (NULL);
+	ptr = malloc(count);
+	if (!ptr)
+		return (NULL);
+	ft_bzero (ptr, count);
+	return (ptr);
 }

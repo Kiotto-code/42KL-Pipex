@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_duparr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 21:31:47 by yichan            #+#    #+#             */
-/*   Updated: 2022/11/22 21:31:59 by yichan           ###   ########.fr       */
+/*   Created: 2023/02/24 01:45:05 by yichan            #+#    #+#             */
+/*   Updated: 2023/03/14 00:45:25 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+char	**ft_duparr(char **arr)
 {
-	size_t	it;
+	char	**ret;
+	int		arr_len;
 
-	it = 0;
-	while (s1[it] && s2[it] && (s1[it] == s2[it]))
-		it++;
-	return ((unsigned char)s1[it] - (unsigned char)s2[it]);
+	if (!arr)
+		return (NULL);
+	arr_len = ft_arrind(arr);
+	ret = malloc(sizeof(char *) * (arr_len + 1));
+	ret[arr_len] = 0;
+	while (arr_len-- >= 0)
+		ret[arr_len] = ft_strdup(arr[arr_len]);
+	return (ret);
 }

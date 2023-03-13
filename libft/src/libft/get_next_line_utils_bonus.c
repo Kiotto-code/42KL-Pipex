@@ -6,11 +6,11 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 21:01:26 by yichan            #+#    #+#             */
-/*   Updated: 2022/12/07 16:25:24 by yichan           ###   ########.fr       */
+/*   Updated: 2023/01/29 14:27:20 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
 size_t	ft_strlen2(char *str)
 {
