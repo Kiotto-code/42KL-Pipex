@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:48:29 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/04 22:04:13 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/14 01:54:09 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,6 @@ char	**getpath(char **envp)
 		i++;
 	}
 	return (NULL);
-}
-
-void	show_heredoc(char *line, int *fd)
-{
-	if (line[ft_strlen(line)] != '\n')
-		ft_strlcat(line, "\n", line[ft_strlen(line)]);
-	if (write(fd[1], line, ft_strlen(line)) == -1)
-		perror("ERROR");
-	if (write(fd[1], "\n", 1) == -1)
-		perror("ERROR");
 }
 
 char	*connector(char *s1, char medium, char *s2)
@@ -72,11 +62,11 @@ pid_t	fileopen(char *path, char flag)
 	else if (flag == 'h')
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd == -1)
-		perror("ERROR");
+		ft_perror(path);
 	return (fd);
 }
 
-void	strclear(char **str)
+void	arrclear(char **str)
 {
 	int	i;
 

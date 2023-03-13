@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 00:44:43 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/14 02:36:15 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,22 @@ void	ins_limiter(int *fd, char *limiter)
 {
 	char	*line;
 
-	limiter = ft_strjoinf(limiter, "\n");
+	limiter = ft_strjoin(limiter, "\n");
 	close(fd[0]);
 	while (1)
 	{
 		ft_putstr_fd("pipe heredoc>", 1);
 		line = get_next_line(0);
 		if (!line)
-			exit(EXIT_SUCCESS);
+			ft_exit(EXIT_SUCCESS);
 		if (ft_strcmp(limiter, line) == 0)
-		{
-			close(fd[1]);
-			free(line);
-			exit(EXIT_SUCCESS);
-		}
-		ft_putendl_fd(line, 1);
+			break ;
+		ft_putstr_fd(line, fd[1]);
 		free(line);
 	}
-	free(line);
 	close(fd[1]);
-	ft_perror("ERROR");
+	free(line);
+	ft_exit(EXIT_SUCCESS);
 }
 
 /*
@@ -66,14 +62,13 @@ void	executer(char *cmd, char *envp[])
 		if (access(object, F_OK) == 0)
 		{
 			if (execve(object, command, envp) == -1)
-				ft_perror("ERROR");
+				ft_perror(command[0]);
 		}
 		free(object);
 		i ++;
 	}
-	strclear(command);
-	strclear(paths);
-	ft_perror("ERROR: command not found");
+	arrclear(paths);
+	ft_perror(*command);
 }
 
 void	here_doc(int ac, char *av[])

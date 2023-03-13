@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 21:33:25 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 00:39:29 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/14 02:35:56 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	ft_perror(char *str)
 {
 	perror(str);
 	exit(EXIT_FAILURE);
+}
+
+void	ft_exit(int stat)
+{
+	exit(stat);
 }
 
 /* 
