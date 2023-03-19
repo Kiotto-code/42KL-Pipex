@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:26:21 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 03:27:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/19 19:09:26 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ char	*get_env_val(char **envp, char *key);
 char	*connector(char *s1, char medium, char *s2);
 void	arrclear(char **str);
 pid_t	fileopen(char *path, char flag);
-void	func(void);
+// void	func(void);
 
 #endif

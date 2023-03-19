@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:48:29 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 03:47:23 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/19 19:09:16 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ pid_t	fileopen(char *path, char flag)
 		fd = open(path, O_RDONLY);
 		if (fd == -1)
 		{
-			func();
 			ft_error(ft_strjoin("no such file or directory: ", path), 1);
-			// ft_perror(path);
 		}
 	}
 	else if (flag == 'O')

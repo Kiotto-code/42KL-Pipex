@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 21:11:00 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/19 19:09:32 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,5 @@ void	pipex(int ac, char **av, char**envp)
 		command_executing(av[num++], envp);
 	if (dup2(fd_out, STDOUT_FILENO) == -1)
 		ft_perror("ERROR");
-	func();
 	executer(av[ac - 2], envp);
 }
