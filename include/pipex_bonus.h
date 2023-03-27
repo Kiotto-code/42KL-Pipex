@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:26:21 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/19 19:09:26 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/27 21:25:38 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_perror(char *str);
 void	ft_exit(int stat);
 
 //utils.c
+void	ins_limiter(int *fd, char *limiter);
 void	pipex(int ac, char **av, char**envp);
 
 // pipex.c

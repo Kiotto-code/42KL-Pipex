@@ -6,11 +6,33 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:48:29 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/19 19:09:16 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/27 21:27:07 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
+
+void	ins_limiter(int *fd, char *limiter)
+{
+	char	*line;
+
+	limiter = ft_strjoin(limiter, "\n");
+	close(fd[0]);
+	while (1)
+	{
+		ft_putstr_fd("pipe heredoc>", 1);
+		line = get_next_line(0);
+		if (!line)
+			ft_exit(EXIT_SUCCESS);
+		if (ft_strcmp(limiter, line) == 0)
+			break ;
+		ft_putstr_fd(line, fd[1]);
+		free(line);
+	}
+	close(fd[1]);
+	free(line);
+	ft_exit(EXIT_SUCCESS);
+}
 
 char	*get_env_val(char **envp, char *key)
 {

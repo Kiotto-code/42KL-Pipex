@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/19 22:51:32 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/27 21:28:33 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@
 /*strcmp to check the line equal to limiter(block)*/
 /*nodup is needed if written inside the fd[1] directly*/
 
-void	ins_limiter(int *fd, char *limiter)
-{
-	char	*line;
+// void	ins_limiter(int *fd, char *limiter)
+// {
+// 	char	*line;
 
-	limiter = ft_strjoin(limiter, "\n");
-	close(fd[0]);
-	while (1)
-	{
-		ft_putstr_fd("pipe heredoc>", 1);
-		line = get_next_line(0);
-		if (!line)
-			ft_exit(EXIT_SUCCESS);
-		if (ft_strcmp(limiter, line) == 0)
-			break ;
-		ft_putstr_fd(line, fd[1]);
-		free(line);
-	}
-	close(fd[1]);
-	free(line);
-	ft_exit(EXIT_SUCCESS);
-}
+// 	limiter = ft_strjoin(limiter, "\n");
+// 	close(fd[0]);
+// 	while (1)
+// 	{
+// 		ft_putstr_fd("pipe heredoc>", 1);
+// 		line = get_next_line(0);
+// 		if (!line)
+// 			ft_exit(EXIT_SUCCESS);
+// 		if (ft_strcmp(limiter, line) == 0)
+// 			break ;
+// 		ft_putstr_fd(line, fd[1]);
+// 		free(line);
+// 	}
+// 	close(fd[1]);
+// 	free(line);
+// 	ft_exit(EXIT_SUCCESS);
+// }
 
 /*
 H - here_doc
@@ -128,6 +128,34 @@ void	command_executing(char *cmd, char *envp[])
 	}
 }
 
+void	file_executer(char *cmd, char *envp[])
+{
+	int	fd[2];
+	int	pid;
+
+	if (pipe(fd) == -1)
+		ft_perror ("ERROR");
+	pid = fork();
+	if (pid == -1)
+		ft_perror("ERROR");
+	if (pid == 0)
+	{
+		close (fd[0]);
+		// if (dup2(fd[1], STDOUT_FILENO) == -1)
+		// 	ft_perror("ERROR");
+		close(fd[1]);
+		executer(cmd, envp);
+	}
+	else
+	{
+		close(fd[1]);
+		if (dup2(fd[0], STDIN_FILENO) == -1)
+			ft_perror("ERROR");
+		close(fd[0]);
+		waitpid(pid, NULL, 0);
+	}
+}
+
 void	pipex(int ac, char **av, char**envp)
 {
 	int		num;
@@ -152,5 +180,6 @@ void	pipex(int ac, char **av, char**envp)
 		command_executing(av[num++], envp);
 	if (dup2(fd_out, STDOUT_FILENO) == -1)
 		ft_perror("ERROR");
-	executer(av[ac - 2], envp);
+	// executer(av[ac - 2], envp);
+	file_executer(av[ac - 2], envp);
 }
