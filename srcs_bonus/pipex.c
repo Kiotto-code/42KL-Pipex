@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/27 21:28:33 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/27 21:33:44 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,4 +182,5 @@ void	pipex(int ac, char **av, char**envp)
 		ft_perror("ERROR");
 	// executer(av[ac - 2], envp);
 	file_executer(av[ac - 2], envp);
+	system("leaks -q pipex");
 }
