@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:48:29 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/27 21:27:07 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/30 21:25:02 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ins_limiter(int *fd, char *limiter)
 	}
 	close(fd[1]);
 	free(line);
+	free(limiter);
+	// system("leaks -q pipex");
 	ft_exit(EXIT_SUCCESS);
 }
 
