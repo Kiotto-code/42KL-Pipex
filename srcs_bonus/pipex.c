@@ -6,13 +6,14 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:00:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/30 21:20:49 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/28 02:10:06 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 #include <stdio.h>
 
+// #define LEAKSCHECK system("leaks -q pipex")
 /*strcmp to check the line equal to limiter(block)*/
 /*nodup is needed if written inside the fd[1] directly*/
 
@@ -141,8 +142,6 @@ void	file_executer(char *cmd, char *envp[])
 	if (pid == 0)
 	{
 		close (fd[0]);
-		// if (dup2(fd[1], STDOUT_FILENO) == -1)
-		// 	ft_perror("ERROR");
 		close(fd[1]);
 		executer(cmd, envp);
 	}
@@ -180,7 +179,5 @@ void	pipex(int ac, char **av, char**envp)
 		command_executing(av[num++], envp);
 	if (dup2(fd_out, STDOUT_FILENO) == -1)
 		ft_perror("ERROR");
-	// executer(av[ac - 2], envp);
 	file_executer(av[ac - 2], envp);
-	system("leaks -q pipex");
 }
